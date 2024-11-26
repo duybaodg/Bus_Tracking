@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="50dp"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <Button
+        android:id="@+id/btn_callAPI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Call API"
+        />
+    <Button
+        android:id="@+id/btn_listBus"
+        android:text="View List Of Bus Positon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/id_view_on_map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View on Map"/>
+
+</LinearLayout>
