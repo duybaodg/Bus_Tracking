@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 import com.example.api_with_header.api.APIStaticService;
 import com.example.api_with_header.api.ApiService;
@@ -42,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private List<StopLocation> listOfStopLocationGetFromAPI = new ArrayList<>();
     private BottomNavigationView bottomNavigationView;
     private ViewPager mViewPager;
-    private Fragment mapFragment;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         callAPI();
         callAPIStatic();
         updateData();
-        mapFragment = new MapFragment();
+        Fragment mapFragment = new MapFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, mapFragment)
@@ -138,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void callAPIStatic() {
-        APIStaticService.apiService2.callAPIRoutes("5012").enqueue(new Callback<List<Routes>>() {
+        APIStaticService.apiService2.callAPIRoutes("5016").enqueue(new Callback<List<Routes>>() {
             @Override
             public void onResponse(@NonNull Call<List<Routes>> call, @NonNull Response<List<Routes>> response) {
                 if(response.isSuccessful()) {
