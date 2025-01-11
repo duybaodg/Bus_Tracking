@@ -1,4 +1,4 @@
-package com.example.api_with_header;
+package com.example.api_with_header.fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.api_with_header.objects.BusTrip;
+import com.example.api_with_header.R;
 import com.example.api_with_header.objects.StopLocation;
 
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package com.example.api_with_header.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,15 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.api_with_header.ListApplication;
-import com.example.api_with_header.MainActivity;
 import com.example.api_with_header.R;
-import com.example.api_with_header.ScheduleFragmentAdapter;
 import com.example.api_with_header.api.APIStaticService;
 import com.example.api_with_header.objects.BusTrip;
-import com.example.api_with_header.objects.Routes;
 import com.example.api_with_header.objects.StopLocation;
 
 import java.util.ArrayList;
@@ -93,7 +87,7 @@ public void runAPI() {
     callAPIGetStopLocation(searchResult);
     }
     private void updateRecyclerView() {
-        RecyclerView recyclerView = getView().findViewById(R.id.rcv_data_schedule);
+        RecyclerView recyclerView = requireView().findViewById(R.id.rcv_data_schedule);
         ScheduleFragmentAdapter scheduleFragmentAdapter = new ScheduleFragmentAdapter(listOfStopIdObject);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL);

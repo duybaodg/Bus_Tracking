@@ -10,19 +10,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.api_with_header.DetailsActivity;
-import com.example.api_with_header.HomeFragmentAdapter;
 import com.example.api_with_header.IClickItemUserListener;
 import com.example.api_with_header.ListApplication;
-import com.example.api_with_header.MainActivity;
 import com.example.api_with_header.R;
 import com.example.api_with_header.objects.BusTrip;
-import com.example.api_with_header.objects.Routes;
 
 import java.util.ArrayList;
 import java.util.List;

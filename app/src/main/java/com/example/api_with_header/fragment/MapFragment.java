@@ -12,6 +12,7 @@ import android.widget.SearchView;
 import com.example.api_with_header.ListApplication;
 import com.example.api_with_header.R;
 import com.example.api_with_header.objects.Position;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -30,12 +31,14 @@ public class MapFragment extends Fragment {
     private SearchView mapSearch;
     private final Handler handler = new Handler();
     private static final int RELOAD_TIME_MS = 5000;
+    private boolean hasMovedCameraOnce = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mapView = inflater.inflate(R.layout.fragment_map, container, false);
         supportMapFragment = (SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.mapFragment);
+        hasMovedCameraOnce = false;
         reloadMapData();
         return mapView;
     }
@@ -43,15 +46,17 @@ public class MapFragment extends Fragment {
         ListApplication listApplication = (ListApplication) requireActivity().getApplication();
         savedPosition = listApplication.getBusLocation();
         supportMapFragment.getMapAsync(googleMap -> {
-
             LatLng markerLocation = new LatLng(-41.2924, 174.7787);
-            googleMap.addMarker(new MarkerOptions().position(markerLocation).title("W"));
-            //googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLocation, 14f));
+            googleMap.addMarker(new MarkerOptions().position(markerLocation));
+            if(!hasMovedCameraOnce) {
+                hasMovedCameraOnce = true;
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLocation, 14f));
+            }
             mMap = googleMap;
             CameraPosition currentCameraPosition = mMap.getCameraPosition();
-           if (mMap != null) {
+            if (mMap != null) {
                 mMap.clear();
-               // LatLng lastLocation = new LatLng(-41.2924, 174.7787);
+                // LatLng lastLocation = new LatLng(-41.2924, 174.7787);
                 for (Position position : savedPosition) {
                     LatLng latLng = new LatLng(position.getLatitude(), position.getLongitude());
                     MarkerOptions markerOptions = new MarkerOptions()
@@ -59,7 +64,7 @@ public class MapFragment extends Fragment {
                             .position(latLng)
                             .title("Bus Bearing: " + position.getBearing());
                     mMap.addMarker(markerOptions);
-                  //  lastLocation = latLng;
+                    //  lastLocation = latLng;
                 }
                 mMap.animateCamera(CameraUpdateFactory.newCameraPosition(currentCameraPosition));
                 //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastLocation, 12.0f));
