@@ -7,19 +7,40 @@
     android:paddingTop="50dp"
     android:paddingLeft="50dp"
     android:background="@color/light_blue">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textColor="@color/white"
-        android:text="Time Table"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_data_schedule"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="40dp"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-        />
+        android:paddingTop="100dp" />
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="@color/white"
+        android:text="Search Bus Stop and Route"/>
+    <EditText
+        android:id="@+id/editText_search"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_title"
+        android:layout_marginBottom="-60dp"
+        android:hint="Enter the Bus number"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
+    <Button
+        android:id="@+id/id_btnSearch"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/tv_title"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="-60dp"
+        android:layout_toEndOf="@+id/editText_search"
+        android:backgroundTint="@color/white"
+        android:text="Search"
+        android:textColor="@color/black" />
+
 </RelativeLayout>

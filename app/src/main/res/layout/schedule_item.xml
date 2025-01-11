@@ -9,7 +9,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:id="@+id/img_schedule_avatar"
-        android:src="@drawable/baseline_done_outline_24"/>
+        android:src="@drawable/baseline_hail_24"/>
     <LinearLayout
         android:layout_centerVertical="true"
         android:layout_width="match_parent"
@@ -30,6 +30,6 @@
             android:layout_height="wrap_content"
             android:text="Schedule Route"
             android:textColor="@android:color/white"
-            android:textSize="14sp"/>
+            android:textSize="16sp"/>
     </LinearLayout>
 </RelativeLayout>

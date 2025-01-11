@@ -42,7 +42,7 @@ public interface APIStaticService {
             .build()
             .create(APIStaticService.class);
     @GET("stops")
-    Call <List<StopLocation>> callAPIStopLocation(@Query("trip_id") String tripId);
+    Call <List<StopLocation>> callAPIStopLocation(@Query("route_id") String routeId);
     @GET("routes")
     Call <List<Routes>> callAPIRoutes(@Query("stop_id") String stopId);
 }

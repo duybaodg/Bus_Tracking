@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        callAPIGetStopLocation();
+        callAPIGetStopLocation("10");
         callAPI();
         callAPIStatic();
         updateData();
@@ -179,8 +179,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void callAPIGetStopLocation() {
-        APIStaticService.apiService2.callAPIStopLocation("21__0__231__NBM__24__2__24__2_20241222").enqueue(new Callback<List<StopLocation>>() {
+    public void callAPIGetStopLocation(String routeId) {
+        APIStaticService.apiService2.callAPIStopLocation(routeId).enqueue(new Callback<List<StopLocation>>() {
             @Override
             public void onResponse(@NonNull Call<List<StopLocation>> call, @NonNull Response<List<StopLocation>> response) {
                 if(response.isSuccessful()) {
