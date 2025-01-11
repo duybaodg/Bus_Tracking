@@ -21,10 +21,10 @@ public class ShowListOfBus extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_show_list_of_bus);
+        setContentView(R.layout.fragment_schedule);
         ListApplication listApplication = (ListApplication)getApplicationContext();
         List<Position> listBusPositon = listApplication.getBusLocation();
-        listViewPositon = findViewById(R.id.id_listView);
+        listViewPositon = findViewById(R.id.id_listViewFragment);
         listViewPositon.setAdapter(new ArrayAdapter<Position>(this, android.R.layout.simple_list_item_1, listBusPositon));
     }
 }

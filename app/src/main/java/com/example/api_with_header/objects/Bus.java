@@ -21,15 +21,14 @@ public class Bus {
         return vehicle;
     }
 
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
     @Override
     public String toString() {
         return "Bus{" +
                 "id=" + id +
                 ", vehicle=" + vehicle +
                 '}';
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
     }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp">
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/img_bus_avatar"
+        android:src="@drawable/baseline_directions_bus_filled_24"/>
+    <LinearLayout
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/img_bus_avatar"
+        android:layout_marginStart="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_busId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bus Id here"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/tv_busRoute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bus Route"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+    </LinearLayout>
+</RelativeLayout>

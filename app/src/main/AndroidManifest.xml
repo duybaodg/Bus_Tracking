@@ -19,6 +19,9 @@
         android:theme="@style/Theme.API_With_Header"
         tools:targetApi="31">
         <activity
+            android:name=".DetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ShowListOfBus"
             android:exported="false" />
         <!--

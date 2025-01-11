@@ -1,9 +1,10 @@
 package com.example.api_with_header.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Position {
+public class Position implements Serializable {
     private double bearing;
     private float latitude;
     private float longitude;
