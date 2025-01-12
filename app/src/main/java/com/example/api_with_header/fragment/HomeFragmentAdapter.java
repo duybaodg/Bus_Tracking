@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.api_with_header.IClickItemUserListener;
 import com.example.api_with_header.R;
 import com.example.api_with_header.objects.BusTrip;
 import java.util.List;

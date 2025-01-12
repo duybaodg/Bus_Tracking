@@ -3,9 +3,9 @@ package com.example.api_with_header.objects;
 import java.io.Serializable;
 
 public class BusTrip implements Serializable {
+    private int id;
     private String busIdName;
     private String busRoutine;
-    private int id;
     private String routeId;
     private String routeDesc;
 

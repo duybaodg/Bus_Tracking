@@ -14,6 +14,7 @@ import com.example.api_with_header.api.ApiService;
 import com.example.api_with_header.fragment.MapFragment;
 import com.example.api_with_header.objects.BusTrip;
 import com.example.api_with_header.objects.Entity;
+import com.example.api_with_header.objects.ListOfData;
 import com.example.api_with_header.objects.Position;
 import com.example.api_with_header.objects.Routes;
 import com.example.api_with_header.objects.StopLocation;

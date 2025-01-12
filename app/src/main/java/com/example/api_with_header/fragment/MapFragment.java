@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
-import com.example.api_with_header.ListOfData;
+import com.example.api_with_header.objects.ListOfData;
 import com.example.api_with_header.R;
 import com.example.api_with_header.objects.Position;
 import com.google.android.gms.maps.CameraUpdateFactory;

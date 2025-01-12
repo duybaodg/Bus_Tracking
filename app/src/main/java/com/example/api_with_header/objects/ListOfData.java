@@ -1,10 +1,5 @@
-package com.example.api_with_header;
+package com.example.api_with_header.objects;
 import android.app.Application;
-
-import com.example.api_with_header.objects.BusTrip;
-import com.example.api_with_header.objects.Position;
-import com.example.api_with_header.objects.Routes;
-import com.example.api_with_header.objects.StopLocation;
 
 import java.util.ArrayList;
 import java.util.List;
