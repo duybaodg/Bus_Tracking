@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.api_with_header.DetailsActivity;
 import com.example.api_with_header.IClickItemUserListener;
-import com.example.api_with_header.ListApplication;
+import com.example.api_with_header.ListOfData;
 import com.example.api_with_header.R;
 import com.example.api_with_header.objects.BusTrip;
 
@@ -39,7 +40,7 @@ public class HomeFragment extends Fragment implements IClickItemUserListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setUpData(view);
+        setUpData();
     }
     @Override
     public void onClickBusItem(BusTrip busTrip) {
@@ -49,11 +50,11 @@ public class HomeFragment extends Fragment implements IClickItemUserListener {
         intent.putExtras(bundle);
         startActivity(intent);
     }
-    public void setUpData (View view) {
-        RecyclerView recyclerView = view.findViewById(R.id.rcv_data);
+    public void setUpData () {
+        RecyclerView recyclerView = requireView().findViewById(R.id.rcv_data);
         busTrips.clear();
-        ListApplication listApplication = (ListApplication) requireActivity().getApplication();
-        busTrips = listApplication.getListOfBusTrips();
+        ListOfData listOfData = (ListOfData) requireActivity().getApplication();
+        busTrips = listOfData.getListOfBusTrips();
         HomeFragmentAdapter homeFragmentAdapter = new HomeFragmentAdapter(busTrips, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(requireContext(),DividerItemDecoration.VERTICAL);

@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 import com.example.api_with_header.api.APIStaticService;
 import com.example.api_with_header.api.ApiService;
@@ -50,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         callAPIGetStopLocation("10");
-        callAPI();
-        callAPIStatic();
+        callAPIVehiclePosition();
+        callAPIGetBusRoute();
         updateData();
         Fragment mapFragment = new MapFragment();
         getSupportFragmentManager()
@@ -80,40 +79,49 @@ public class MainActivity extends AppCompatActivity {
         final Runnable refresh = new Runnable() {
             @Override
             public void run() {
-                callAPI();
+                callAPIVehiclePosition();
                 handler.postDelayed(this, 5000);
             }
         };
         handler.postDelayed(refresh, 5000);
     }
-    public void callAPI() {
+    public void callAPIVehiclePosition() {
         ApiService.apiService.callApi().enqueue(new Callback<Entity>() {
             @Override
             public void onResponse(@NonNull Call<Entity> call, @NonNull Response<Entity> response) {
                 if(response.isSuccessful() && response.body() != null) {
+
                     Entity entity = response.body();
-                    ListApplication listApplication = (ListApplication)getApplicationContext();
-                    savedPosition = listApplication.getBusLocation();
-                    listOfTripId = listApplication.getTripId();
-                    listOfRouterId = listApplication.getRouteId();
-                    listOfDirectionId = listApplication.getDirectionId();
-                    listOfVehicleId = listApplication.getVehicleId();
+
+                    //Call new Object from Class to save new Data
+                    ListOfData listOfData = (ListOfData)getApplicationContext();
+
+                    //Call new List to save Data get from API
+                    savedPosition = listOfData.getBusLocation();
+                    listOfTripId = listOfData.getTripId();
+                    listOfRouterId = listOfData.getRouteId();
+                    listOfDirectionId = listOfData.getDirectionId();
+                    listOfVehicleId = listOfData.getVehicleId();
+
                     savedPosition.clear();
+
                     for(int i = 0; i < entity.getEntity().size(); i++) {
                         double bearing = entity.getEntity().get(i).getVehicle().getPosition().getBearing();
                         float latitude = entity.getEntity().get(i).getVehicle().getPosition().getLatitude();
                         float longitude = entity.getEntity().get(i).getVehicle().getPosition().getLongitude();
-                        Position position = new Position(bearing, latitude, longitude);
                         String tripId = entity.getEntity().get(i).getVehicle().getTrip().getTrip_id();
                         String routerId = entity.getEntity().get(i).getVehicle().getTrip().getRoute_id();
                         int directionId = entity.getEntity().get(i).getVehicle().getTrip().getDirection_id();
                         String vehicleId = entity.getEntity().get(i).getVehicle().getVehicle().getId();
+                        Position position = new Position(bearing, latitude, longitude);
+
                         savedPosition.add(position);
                         listOfTripId.add(tripId);
                         listOfRouterId.add(routerId);
                         listOfDirectionId.add(directionId);
                         listOfVehicleId.add(vehicleId);
-                       // Log.d("Size", "Size of bus: " + savedPosition.size());
+
+
                         Log.d("Bearing", "this is Bearing: " +bearing);
                         Log.d("Longitude", "LIST OF Bus longitude: "+longitude);
                         Log.d("Latitude", "LIST OF Bus latitude "+latitude);
@@ -123,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("vehicleId", "this is vehicleId: " +vehicleId);
                     }
 
-                    Log.d("JSON", "Body JSON" + entity);
                     Log.d("size", "here "+entity.getEntity().size());
                     Log.d("Size", "Size of bus: " + savedPosition.size());
                 } else {
@@ -136,18 +143,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void callAPIStatic() {
+    public void callAPIGetBusRoute() {
         APIStaticService.apiService2.callAPIRoutes("5016").enqueue(new Callback<List<Routes>>() {
             @Override
             public void onResponse(@NonNull Call<List<Routes>> call, @NonNull Response<List<Routes>> response) {
                 if(response.isSuccessful()) {
                     listOfRouteGetFromAPI = response.body();
-                    ListApplication listApplication = (ListApplication)getApplicationContext();
-                    listOfRouterDes = listApplication.getRouteDes();
-                    listOfRouterShortName = listApplication.getRouteShortName();
-                    listOfRouterLongName = listApplication.getRouteLongName();
-                    listOfRoute = listApplication.getBusRouteList();
-                    listOfBusTrip = listApplication.getListOfBusTrips();
+                    ListOfData listOfData = (ListOfData)getApplicationContext();
+
+                    listOfRouterDes = listOfData.getRouteDes();
+                    listOfRouterShortName = listOfData.getRouteShortName();
+                    listOfRouterLongName = listOfData.getRouteLongName();
+                    listOfRoute = listOfData.getBusRouteList();
+                    listOfBusTrip = listOfData.getListOfBusTrips();
+
+
                     assert listOfRouteGetFromAPI != null;
                     for(int i = 0; i < listOfRouteGetFromAPI.size(); i++) {
                         int id = listOfRouteGetFromAPI.get(i).getId();
@@ -155,20 +165,23 @@ public class MainActivity extends AppCompatActivity {
                         String routeShortName = listOfRouteGetFromAPI.get(i).getRoute_short_name();
                         String routeLongName = listOfRouteGetFromAPI.get(i).getRoute_long_name();
                         String routeDes = listOfRouteGetFromAPI.get(i).getRoute_desc();
+
                         Routes route = new Routes(id, routeId, routeShortName, routeLongName, routeDes);
-                        BusTrip busTrip = new BusTrip(routeShortName,routeLongName);
-                        listOfBusTrip.add(busTrip);
+                       // BusTrip busTrip = new BusTrip(routeShortName,routeLongName);
+                        BusTrip busTripDetails = new BusTrip(id, routeId, routeShortName,routeLongName,routeDes);
+
+
+                       // listOfBusTrip.add(busTrip);
+                        listOfBusTrip.add(busTripDetails);
                         listOfRoute.add(route);
                         listOfRouterDes.add(routeDes);
                         listOfRouterShortName.add(routeShortName);
                         listOfRouterLongName.add(routeLongName);
-                        //Log.d("RouteShortname:", "RouteShortname: " + listOfRouterShortName.size());
-                        //Log.d("routeLongName:", "routeLongName: " + listOfRouterLongName.size());
-                        //Log.d("routeDes:", "routeDes: " + listOfRouterDes.size());
                     }
-
+                    Log.d("RouteShortname:", "RouteShortname: " + listOfRouterShortName.size());
+                    Log.d("routeLongName:", "routeLongName: " + listOfRouterLongName.size());
+                    Log.d("routeDes:", "routeDes: " + listOfRouterDes.size());
                     Log.d("listOfRoute", "this is listOfRoute: " +listOfRoute.size());
-
                 } else {
                     Log.e("Fail", "Error code"+ response.code());
                 }
@@ -185,15 +198,18 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<List<StopLocation>> call, @NonNull Response<List<StopLocation>> response) {
                 if(response.isSuccessful()) {
                     listOfStopLocationGetFromAPI = response.body();
-                    ListApplication listApplication = (ListApplication)getApplicationContext();
-                    listOfStopId = listApplication.getStopId();
-                    listOfStopIdObject = listApplication.getListOfStopLocationObject();
+                    ListOfData listOfData = (ListOfData)getApplicationContext();
+
+                    listOfStopId = listOfData.getStopId();
+                    listOfStopIdObject = listOfData.getListOfStopLocationObject();
+
                     assert listOfStopLocationGetFromAPI != null;
                     for(int i = 0; i < listOfStopLocationGetFromAPI.size(); i++) {
                         int stopId = listOfStopLocationGetFromAPI.get(i).getStop_id();
                         String stopName = listOfStopLocationGetFromAPI.get(i).getStop_name();
                         String zoneId = listOfStopLocationGetFromAPI.get(i).getZone_id();
                         StopLocation stopLocation = new StopLocation(stopId, stopName,zoneId);
+
                         listOfStopIdObject.add(stopLocation);
                         listOfStopId.add(stopId);
                     }

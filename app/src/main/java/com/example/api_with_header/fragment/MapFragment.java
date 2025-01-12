@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
-import com.example.api_with_header.ListApplication;
+import com.example.api_with_header.ListOfData;
 import com.example.api_with_header.R;
 import com.example.api_with_header.objects.Position;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -43,14 +42,14 @@ public class MapFragment extends Fragment {
         return mapView;
     }
     private void reloadMapData() {
-        ListApplication listApplication = (ListApplication) requireActivity().getApplication();
-        savedPosition = listApplication.getBusLocation();
+        ListOfData listOfData = (ListOfData) requireActivity().getApplication();
+        savedPosition = listOfData.getBusLocation();
         supportMapFragment.getMapAsync(googleMap -> {
             LatLng markerLocation = new LatLng(-41.2924, 174.7787);
             googleMap.addMarker(new MarkerOptions().position(markerLocation));
             if(!hasMovedCameraOnce) {
                 hasMovedCameraOnce = true;
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLocation, 14f));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerLocation, 12f));
             }
             mMap = googleMap;
             CameraPosition currentCameraPosition = mMap.getCameraPosition();

@@ -9,8 +9,8 @@ import com.example.api_with_header.objects.StopLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListApplication extends Application {
-    public static ListApplication listApplication;
+public class ListOfData extends Application {
+    public static ListOfData listOfData;
     public List<Position> busLocation;
     private List<String> tripId;
     private List<Integer> directionId;
@@ -112,12 +112,12 @@ public class ListApplication extends Application {
     public void setBusLocation(List<Position> busLocation) {
         this.busLocation = busLocation;
     }
-    public ListApplication getInstance() {
-        return listApplication;
+    public ListOfData getInstance() {
+        return listOfData;
     }
     public void onCreate() {
         super.onCreate();
-        listApplication = this;
+        listOfData = this;
         busLocation = new ArrayList<>();
         tripId = new ArrayList<>();
         directionId = new ArrayList<>();
