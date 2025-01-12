@@ -1,8 +1,11 @@
 package com.example.api_with_header;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
     private ListView listView;
+    private Button btnBack;
 
 
     @Override
@@ -25,6 +29,7 @@ public class DetailsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_details);
         listView = findViewById(R.id.id_listDetail);
+        btnBack = findViewById(R.id.id_btnBack);
         Bundle bundle = getIntent().getExtras();
         if(bundle == null) {
             return;
@@ -37,9 +42,16 @@ public class DetailsActivity extends AppCompatActivity {
         busDetails.add("BUS NUMBER: "+busTrip.getBusIdName());
         busDetails.add("BUS ROUTE: "+busTrip.getBusRoutine());
         busDetails.add("BUS ROUTE: "+busTrip.getRouteDesc());
-
-
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>((Context) this, R.layout.detail_item,R.id.tv_detail, busDetails);
         listView.setAdapter(arrayAdapter);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
 }

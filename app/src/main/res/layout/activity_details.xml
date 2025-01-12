@@ -22,11 +22,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="80dp"
-        android:layout_marginLeft="50dp">
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="80dp">
         <ListView
             android:id="@+id/id_listDetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/detail_item"/>
+            tools:listitem="@layout/detail_item">
+        </ListView>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/id_btnBack"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignBottom="@+id/list_layout"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="302dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/white"
+        android:text="Back"
+        android:textColor="@color/black" />
+
 </RelativeLayout>
